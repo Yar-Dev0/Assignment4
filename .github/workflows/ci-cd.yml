@@ -17,7 +17,7 @@ jobs:
       run: docker build -t ahmedyaar/my-image:latest .
 
     - name: Login to DockerHub
-      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+      run: docker login -u ${{ ahmedyaar }} -p ${{ dckr_pat_s12gjfyogSk363PtOfOjLnYS7Fs }}
 
     - name: Push to DockerHub
       run: docker push ahmedyaar/my-image:latest
