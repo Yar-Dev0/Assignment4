@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Pipeline
 
 on:
   push:
@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
+    - name: Docker Login
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
     - name: Build Docker Image
-      run: docker build -t ahmedyaar/python-image-assignment4:latest .
+      run: |
+        docker build -t ahmedyaar/assignment4-python:latest .
 
-    - name: Login to DockerHub
-      run: docker login -u ${{ ahmedyaar }} -p ${{ dckr_pat_s12gjfyogSk363PtOfOjLnYS7Fs }}
-
-    - name: Push to DockerHub
-      run: docker push ahmedyaar/my-image:latest
+    - name: Push Docker Image to Docker Hub
+      run: |
+        docker push ahmedyaar/assignment4-python:latest
